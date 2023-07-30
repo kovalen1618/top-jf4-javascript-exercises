@@ -1,18 +1,27 @@
 const palindromes = function (string) {
-    const split = string.toUpperCase().split('');
-    const punctuation = split.pop();
+    let stringHolder = string;
+    const punctuation = ['!', '.', '?'];
+    const puncExists = stringHolder.split('').some(punc => punctuation.includes(punc));
 
-    console.log('Split: ' + split)
+    stringHolder = stringHolder.split('');
+    if (puncExists) stringHolder.pop();
+    stringHolder = stringHolder.join('').toUpperCase();
+    // With regex replace
+    stringHolder = stringHolder.replace(/,/g, "").replace(/\s/g, "");
 
-    let reverse = split.reverse();
-    reverse.push(punctuation)
-    reverse = reverse.join('');
-    console.log('Reverse: ' + reverse)
+    let reverse = stringHolder.split('').reverse();
+    reverse = reverse.join('').toUpperCase();
+    // With regex replace
+    reverse = reverse.replace(/,/g, "").replace(/\s/g, "");
 
-    return reverse === string.toUpperCase();
+    // console.log(reverse)
+    // console.log(stringHolder)
+
+    return reverse === stringHolder;
 };
 
-console.log(palindromes('Racecar!'));
+// console.log(palindromes('Racecar!'));
+// console.log(palindromes('A car, a man, a maraca.'));
 
 // Do not edit below this line
 module.exports = palindromes;
